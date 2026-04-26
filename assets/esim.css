@@ -70,6 +70,12 @@
   .esim-breadcrumb a:hover { color: var(--primary); }
   .esim-breadcrumb span { margin: 0 4px; }
  
+
+  .esim-breadcrumb p {
+    display: inline;
+    margin: 0;
+    white-space: nowrap;
+  }
   /* ===== Main Layout ===== */
   .esim-product-wrapper {
     max-width: 980px;
@@ -572,20 +578,11 @@ font-size:14px;
     display: inline-block;
     margin-bottom: 16px;
   }
-  .esim-delivery-icon-wrap svg {
-    width: 46px; height: 46px;
-    color: #fff;
-    display: block;
+  .esim-delivery-icon-wrap img {
+ width:10%;
+ height:auto;
   }
-  .esim-delivery-5g {
-    position: absolute;
-    top: -10px; right: -16px;
-    color: #fff;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.05em;
-    line-height: 1;
-  }
+ 
  
   .esim-delivery-title {
     font-size: 22px;
@@ -646,6 +643,12 @@ font-size:14px;
     color: var(--text-light);
     margin-bottom: 36px;
   }
+  .esim-app-icon img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    display: block;
+  }
  
   /* Marquee track */
   .esim-marquee-outer {
@@ -671,10 +674,24 @@ font-size:14px;
     0%   { transform: translateX(0); }
     100% { transform: translateX(-50%); }
   }
- 
+  .esim-app-wrapper {
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .esim-app-track {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 18px;
+    width: max-content;
+    animation: esim-scroll 24s linear infinite;
+  }
+  
   .esim-app-icon {
-    width: 68px;
-    height: 68px;
+    flex: 0 0 auto;
+    width: 60px;
+    height: 60px;
     border-radius: 16px;
     flex-shrink: 0;
     display: flex;
@@ -688,6 +705,16 @@ font-size:14px;
     transition: transform 0.2s, box-shadow 0.2s;
     cursor: default;
   }
+  
+  .esim-app-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  
+ 
+  
   .esim-app-icon:hover {
     transform: translateY(-4px) scale(1.06);
     box-shadow: 0 8px 20px rgba(0,0,0,0.16);
@@ -801,16 +828,24 @@ font-size:14px;
     transform: translateY(-4px);
   }
   .esim-step-badge {
-    display: inline-flex;
-    align-items: center;
-    background: var(--primary);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 4px 12px;
-    border-radius: 6px;
-    margin: 18px 0 0 18px;
-    letter-spacing: 0.04em;
+   
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    
+      background: var(--primary);
+      color: #fff;
+    
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    
+      padding: 4px 12px;
+      border-bottom-right-radius: 8px;
+    
+      height: 50px;
+      min-width: 72px;
+      width: auto;
   }
   .esim-step-img {
     width: 100%;
@@ -1047,6 +1082,7 @@ font-size:14px;
       height: 100%;
       z-index: 2;
       pointer-events: none;
+      display: none !important;
     }
 
     .slider-wrap::before {

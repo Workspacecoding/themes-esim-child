@@ -9,13 +9,27 @@
     <div class="esim-product-info">
               <!-- Breadcrumb -->
     <nav class="esim-breadcrumb">
-    <a href="#">首頁</a><span>/</span>
-    <a href="#">eSIM</a><span>/</span>
-    中國 eSIM
+    <p><a href="#">首頁</p></a><span>/</span>
+    <?php
+$terms = get_the_terms(get_the_ID(), 'product_cat');
+
+if (!empty($terms) && !is_wp_error($terms)) {
+  $term = $terms[0]; // 第一個分類
+  echo '<p><a href="' . esc_url(get_term_link($term)) . '">' . esc_html($term->name) . '</a></p>';
+}
+?><span>/</span>
+    <p>  <?php the_title(); ?></p>
   </nav>
       <div class="esim-product-title-row">
-        <div class="esim-flag">🇨🇳</div>
-        <h1 class="esim-product-title">中國 eSIM</h1>
+      <?php
+$img = get_field('country_img', get_the_ID());
+?>
+    <div class="esim-flag">
+  <?php if ($img): ?>
+    <img src="<?php echo esc_url($img['url']); ?>" alt="<?php echo esc_attr($img['alt']); ?>">
+  <?php endif; ?>
+</div>
+        <h1 class="esim-product-title">  <?php the_title(); ?></h1>
         <span class="esim-badge esim-badge--safe esim-badge--label">品質認證服務</span>
       </div>
  
@@ -42,9 +56,8 @@
   </div>
 
   <p class="esim-carriers">
-    <span>China Mobile 5G</span>
-    <span>China Unicom 5G</span>
-    <span>China Telecom 5G</span>
+    <span><?php echo get_field('esim_tc', get_the_ID()); ?></span>
+   
   </p>
 </div>
 
@@ -58,8 +71,10 @@
         <div class="esim-purchase-card">
         <div class="esim-card-header">
   <div class="esim-card-title">
-    <span class="esim-flag">🇨🇳</span>
-    <span class="esim-title-text">中國 eSIM</span>
+    <span class="esim-flag">  <?php if ($img): ?>
+    <img src="<?php echo esc_url($img['url']); ?>" alt="<?php echo esc_attr($img['alt']); ?>">
+  <?php endif; ?></span>
+    <span class="esim-title-text"><?php the_title(); ?></p></span>
   </div>
 
   <?php echo do_shortcode('[custom_esim_slider]'); ?>
@@ -118,30 +133,13 @@
 
 <!-- ===== Instant Delivery Banner ===== -->
 <div class="esim-delivery-section">
-  <div class="esim-delivery-banner">
- 
-    <!-- dot grid decoration -->
-    <div class="esim-delivery-dots">
-      <span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span>
-    </div>
- 
+<div class="esim-delivery-banner"
+     style="background-image: url('<?php echo wp_upload_dir()['baseurl']; ?>/2026/04/mail-bg.png');">
+
     <div class="esim-delivery-content">
       <!-- Icon: envelope with 5G badge -->
       <div class="esim-delivery-icon-wrap">
-        <span class="esim-delivery-5g">5G</span>
-        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-          <!-- envelope body -->
-          <rect x="4" y="12" width="40" height="28" rx="3" ry="3"/>
-          <!-- envelope flap lines -->
-          <polyline points="4,12 24,28 44,12"/>
-          <!-- signal waves top-right -->
-          <path d="M32 6 Q36 3 40 6" stroke-width="2.2" fill="none"/>
-          <path d="M30 9 Q36 4.5 42 9" stroke-width="2.2" fill="none"/>
-        </svg>
+      <img src="<?php echo wp_upload_dir()['baseurl']; ?>/2026/04/mail.png" alt="mail-icon">
       </div>
  
       <h2 class="esim-delivery-title">無需等待，下單即寄！</h2>
@@ -154,117 +152,60 @@
 
 <!-- ===== App Logos Marquee Section ===== -->
 <div class="esim-apps-section">
-  <h2 class="esim-apps-title">一張蒙古 <span>eSIM</span> 滿足你出行所有需求</h2>
+  <h2 class="esim-apps-title">一張<?php echo get_field('esim_country', get_the_ID()); ?> <span>eSIM</span> 滿足你出行所有需求</h2>
   <p class="esim-apps-desc">我們的蒙古 eSIM 可以讓你在旅遊中與世界各地親友保持聯繫。</p>
  
   <div class="esim-marquee-outer">
     <div class="esim-marquee-track" id="marqueeTrack">
  
-      <!-- Set 1 -->
-      <div class="esim-app-icon esim-app-icon--line">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="#06C755"/><text x="34" y="46" font-size="22" font-weight="900" text-anchor="middle" fill="white" font-family="Arial">LINE</text></svg>
+    <?php
+$app_icons = [
+  ['class' => 'line', 'file' => 'Line-icon.png', 'alt' => 'LINE'],
+  ['class' => 'spotify', 'file' => 'sporticy-icon.png', 'alt' => 'Spotify'],
+  ['class' => 'netflix', 'file' => 'netflix-icon.png', 'alt' => 'Netflix'],
+  ['class' => 'klook', 'file' => 'klook-icon.png', 'alt' => 'Klook'],
+  ['class' => 'kkday', 'file' => 'kkday-icon.png', 'alt' => 'KKday'],
+  ['class' => 'telegram', 'file' => 'tg-icon.png', 'alt' => 'Telexgram'],
+  ['class' => 'trip', 'file' => 'trip-icon.png', 'alt' => 'Trip'],
+  ['class' => 'grab', 'file' => 'grab-icon.png', 'alt' => 'Grab'],
+  ['class' => 'facebook', 'file' => 'Facebook-icon.png', 'alt' => 'Facebook'],
+  ['class' => 'uber', 'file' => 'Ubereats-icon.png', 'alt' => 'Uber'],
+  ['class' => 'youtube', 'file' => 'youtube-icon.png', 'alt' => 'YouTube'],
+  ['class' => 'whatsapp', 'file' => 'whatsapp-icon.png', 'alt' => 'WhatsApp'],
+  ['class' => 'instagram', 'file' => 'Instergram-icon.png', 'alt' => 'Instagram'],
+  ['class' => 'theads', 'file' => 'thread-icon.png', 'alt' => 'threads'],
+];
+
+$upload_url = wp_upload_dir()['baseurl'];
+?>
+
+<div class="esim-app-wrapper">
+  <div class="esim-app-track" id="sliderTrack">
+    <?php foreach ($app_icons as $icon): ?>
+      <div class="esim-app-icon esim-app-icon--<?php echo esc_attr($icon['class']); ?>">
+        <img 
+          src="<?php echo esc_url($upload_url . '/2026/04/' . $icon['file']); ?>" 
+          alt="<?php echo esc_attr($icon['alt']); ?>"
+          loading="lazy"
+        >
       </div>
-      <div class="esim-app-icon esim-app-icon--spotify">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="#1DB954"/><circle cx="34" cy="34" r="16" fill="none" stroke="white" stroke-width="3"/><path d="M22 30 Q34 24 46 28" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M24 36 Q34 31 44 34" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M26 41 Q34 37 42 40" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--netflix">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="#141414"/><text x="34" y="48" font-size="36" font-weight="900" text-anchor="middle" fill="#E50914" font-family="Georgia,serif" font-style="italic">N</text></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--klook">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="#FF5722"/><text x="34" y="43" font-size="18" font-weight="800" text-anchor="middle" fill="white" font-family="Arial">klook</text></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--kkday">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="#00B8A9"/><text x="34" y="43" font-size="15" font-weight="800" text-anchor="middle" fill="white" font-family="Arial">kkday</text></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--telegram">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="#229ED9"/><path d="M14 34 L54 18 L44 52 L30 40 L22 46 L24 36 Z" fill="white"/><path d="M30 40 L43 27" stroke="#229ED9" stroke-width="2.5" fill="none"/></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--trip">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="white" stroke="#eee" stroke-width="1.5"/><text x="34" y="44" font-size="18" font-weight="800" text-anchor="middle" fill="#0066CC" font-family="Arial">Trip.</text></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--grab">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="#00B14F"/><text x="34" y="43" font-size="18" font-weight="800" text-anchor="middle" fill="white" font-family="Arial">Grab</text></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--facebook">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="#1877F2"/><text x="36" y="50" font-size="40" font-weight="900" text-anchor="middle" fill="white" font-family="Arial,sans-serif">f</text></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--uber">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="#000"/><text x="34" y="44" font-size="18" font-weight="700" text-anchor="middle" fill="white" font-family="Arial">Uber</text></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--youtube">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="white" stroke="#eee" stroke-width="1.5"/><rect x="14" y="22" width="40" height="24" rx="6" fill="#FF0000"/><polygon points="28,28 28,40 42,34" fill="white"/></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--whatsapp">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="#25D366"/><circle cx="34" cy="33" r="16" fill="white"/><path d="M24 42 L27 36 A12 12 0 1 1 34 45 Z" fill="#25D366"/></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--instagram">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><defs><linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="75%" stop-color="#cc2366"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs><rect width="68" height="68" rx="16" fill="url(#ig)"/><rect x="18" y="18" width="32" height="32" rx="8" fill="none" stroke="white" stroke-width="3"/><circle cx="34" cy="34" r="8" fill="none" stroke="white" stroke-width="3"/><circle cx="44" cy="24" r="2.5" fill="white"/></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--airbnb">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="#FF5A5F"/><text x="34" y="43" font-size="13" font-weight="700" text-anchor="middle" fill="white" font-family="Arial">Airbnb</text></svg>
-      </div>
- 
-      <!-- Set 2 (duplicate for seamless loop) -->
-      <div class="esim-app-icon esim-app-icon--line">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="#06C755"/><text x="34" y="46" font-size="22" font-weight="900" text-anchor="middle" fill="white" font-family="Arial">LINE</text></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--spotify">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="#1DB954"/><circle cx="34" cy="34" r="16" fill="none" stroke="white" stroke-width="3"/><path d="M22 30 Q34 24 46 28" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M24 36 Q34 31 44 34" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M26 41 Q34 37 42 40" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--netflix">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="#141414"/><text x="34" y="48" font-size="36" font-weight="900" text-anchor="middle" fill="#E50914" font-family="Georgia,serif" font-style="italic">N</text></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--klook">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="#FF5722"/><text x="34" y="43" font-size="18" font-weight="800" text-anchor="middle" fill="white" font-family="Arial">klook</text></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--kkday">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="#00B8A9"/><text x="34" y="43" font-size="15" font-weight="800" text-anchor="middle" fill="white" font-family="Arial">kkday</text></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--telegram">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="#229ED9"/><path d="M14 34 L54 18 L44 52 L30 40 L22 46 L24 36 Z" fill="white"/><path d="M30 40 L43 27" stroke="#229ED9" stroke-width="2.5" fill="none"/></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--trip">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="white" stroke="#eee" stroke-width="1.5"/><text x="34" y="44" font-size="18" font-weight="800" text-anchor="middle" fill="#0066CC" font-family="Arial">Trip.</text></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--grab">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="#00B14F"/><text x="34" y="43" font-size="18" font-weight="800" text-anchor="middle" fill="white" font-family="Arial">Grab</text></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--facebook">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="#1877F2"/><text x="36" y="50" font-size="40" font-weight="900" text-anchor="middle" fill="white" font-family="Arial,sans-serif">f</text></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--uber">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="#000"/><text x="34" y="44" font-size="18" font-weight="700" text-anchor="middle" fill="white" font-family="Arial">Uber</text></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--youtube">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="white" stroke="#eee" stroke-width="1.5"/><rect x="14" y="22" width="40" height="24" rx="6" fill="#FF0000"/><polygon points="28,28 28,40 42,34" fill="white"/></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--whatsapp">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="#25D366"/><circle cx="34" cy="33" r="16" fill="white"/><path d="M24 42 L27 36 A12 12 0 1 1 34 45 Z" fill="#25D366"/></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--instagram">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><defs><linearGradient id="ig2" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="75%" stop-color="#cc2366"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs><rect width="68" height="68" rx="16" fill="url(#ig2)"/><rect x="18" y="18" width="32" height="32" rx="8" fill="none" stroke="white" stroke-width="3"/><circle cx="34" cy="34" r="8" fill="none" stroke="white" stroke-width="3"/><circle cx="44" cy="24" r="2.5" fill="white"/></svg>
-      </div>
-      <div class="esim-app-icon esim-app-icon--airbnb">
-        <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg" width="68" height="68"><rect width="68" height="68" rx="16" fill="#FF5A5F"/><text x="34" y="43" font-size="13" font-weight="700" text-anchor="middle" fill="white" font-family="Arial">Airbnb</text></svg>
-      </div>
- 
+    <?php endforeach; ?>
+  </div>
+</div>
+
     </div><!-- /.esim-marquee-track -->
   </div><!-- /.esim-marquee-outer -->
 </div><!-- /.esim-apps-section -->
 
 <!-- ===== Why Choose Us ===== -->
 <div class="esim-why-section">
-  <h2 class="esim-section-heading">為什麼選擇我們的中國 eSIM？</h2>
+  <h2 class="esim-section-heading">為什麼選擇我們的<?php echo get_field('esim_country', get_the_ID()); ?> eSIM？</h2>
   <div class="esim-features-grid">
  
     <!-- 1 -->
     <div class="esim-feature-item">
       <div class="esim-feature-icon">
-        <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 34 Q10 10 22 8 Q34 10 38 34"/>
-          <path d="M12 34 Q16 18 22 16 Q28 18 32 34"/>
-          <line x1="22" y1="8" x2="22" y2="36"/>
-        </svg>
+      <img src="<?php echo wp_upload_dir()['baseurl']; ?>/2026/04/002-speedometer.png" alt="speed">
       </div>
       <div class="esim-feature-title">極快的 4G/5G 網路速度</div>
       <div class="esim-feature-desc">我們的 eSIM 可以讓您在中國 99% 時間裏享受最高速的 4G/5G 網路。</div>
@@ -273,12 +214,7 @@
     <!-- 2 -->
     <div class="esim-feature-item">
       <div class="esim-feature-icon">
-        <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M8 22 Q8 10 22 10 Q36 10 36 22 Q36 34 22 34 Q8 34 8 22Z"/>
-          <path d="M6 22 Q22 14 38 22"/>
-          <path d="M6 22 Q22 30 38 22"/>
-          <line x1="22" y1="10" x2="22" y2="34"/>
-        </svg>
+      <img src="<?php echo wp_upload_dir()['baseurl']; ?>/2026/04/001-infinity.png" alt="volume">
       </div>
       <div class="esim-feature-title">流量吃到飽</div>
       <div class="esim-feature-desc">每天無限流量任用，當您決定好需要的上網天數就可以直接出發。</div>
@@ -287,12 +223,7 @@
     <!-- 3 -->
     <div class="esim-feature-item">
       <div class="esim-feature-icon">
-        <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="22" cy="14" r="5"/>
-          <path d="M10 38 C10 28 34 28 34 38"/>
-          <path d="M30 10 Q38 14 36 22"/>
-          <path d="M32 7 Q44 12 42 24"/>
-        </svg>
+      <img src="<?php echo wp_upload_dir()['baseurl']; ?>/2026/04/001-tower.png" alt="tc">
       </div>
       <div class="esim-feature-title">使用當地電訊公司</div>
       <div class="esim-feature-desc">使用中國當地主流電信網路，無論您在偏遠地區或是旅遊景點，都能享有穩定連線。</div>
@@ -301,13 +232,7 @@
     <!-- 4 -->
     <div class="esim-feature-item">
       <div class="esim-feature-icon">
-        <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="8" y="12" width="28" height="20" rx="2"/>
-          <polyline points="8,14 22,24 36,14"/>
-          <line x1="14" y1="32" x2="14" y2="36"/>
-          <line x1="30" y1="32" x2="30" y2="36"/>
-          <line x1="10" y1="36" x2="34" y2="36"/>
-        </svg>
+      <img src="<?php echo wp_upload_dir()['baseurl']; ?>/2026/04/002-email.png" alt="get-esim">
       </div>
       <div class="esim-feature-title">下單後立即收貨</div>
       <div class="esim-feature-desc">無需等待，下單後我們將會立即將 eSIM 發送到您電子郵件中。</div>
@@ -316,12 +241,7 @@
     <!-- 5 -->
     <div class="esim-feature-item">
       <div class="esim-feature-icon">
-        <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="22" cy="22" r="14"/>
-          <line x1="22" y1="8" x2="22" y2="36"/>
-          <path d="M8 22 Q14 16 22 18 Q30 16 36 22"/>
-          <path d="M8 22 Q14 28 22 26 Q30 28 36 22"/>
-        </svg>
+      <img src="<?php echo wp_upload_dir()['baseurl']; ?>/2026/04/002-destination.png" alt="support-country">
       </div>
       <div class="esim-feature-title">支援 170 多個國家與地區</div>
       <div class="esim-feature-desc">只需點擊一下，走到哪用到哪！我們的 eSIM 在全球各大洲、熱門旅遊地點皆有支援。</div>
@@ -330,13 +250,7 @@
     <!-- 6 -->
     <div class="esim-feature-item">
       <div class="esim-feature-icon">
-        <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="8" y="8" width="28" height="28" rx="2"/>
-          <line x1="8" y1="18" x2="36" y2="18"/>
-          <line x1="16" y1="8" x2="16" y2="18"/>
-          <line x1="28" y1="8" x2="28" y2="18"/>
-          <polyline points="14,26 20,32 30,22"/>
-        </svg>
+      <img src="<?php echo wp_upload_dir()['baseurl']; ?>/2026/04/001-invoice.png" alt="fee">
       </div>
       <div class="esim-feature-title">極高性價比</div>
       <div class="esim-feature-desc">告別傳統電信公司昂貴漫遊費用，並且我們保證沒有隱藏額外收費。</div>
@@ -347,7 +261,7 @@
  
 <!-- ===== How to Buy ===== -->
 <div class="esim-howto-section">
-  <h2 class="esim-section-heading">如何購買中國 eSIM</h2>
+  <h2 class="esim-section-heading">如何購買<?php echo get_field('esim_country', get_the_ID()); ?> eSIM</h2>
   <p class="esim-howto-subtitle">購買到安裝快至 1 分鐘即可上網。</p>
  
   <div class="esim-steps-grid">
@@ -527,8 +441,8 @@
 <div class="esim-cta-section">
   <div class="esim-cta-banner">
     <div class="esim-cta-text">
-      <div class="esim-cta-title">最好的中國 eSIM 是哪一個？</div>
-      <p class="esim-cta-desc">最好的中國 eSIM 是 OceanEsim，這張 eSIM 可以獲得<strong>無限吃到飽流量</strong>，而且提供極快的網路速度與穩定訊號，即買即用，一鍵快速安裝啟用，無論你是到旅遊景點還是偏遠地區，我們的 eSIM 都能隨時讓你保持連線。</p>
+      <div class="esim-cta-title">最好的<?php echo get_field('esim_country', get_the_ID()); ?> eSIM 是哪一個？</div>
+      <p class="esim-cta-desc">最好的<?php echo get_field('esim_country', get_the_ID()); ?> eSIM 是 OceanEsim，這張 eSIM 可以獲得<strong>無限吃到飽流量</strong>，而且提供極快的網路速度與穩定訊號，即買即用，一鍵快速安裝啟用，無論你是到旅遊景點還是偏遠地區，我們的 eSIM 都能隨時讓你保持連線。</p>
     </div>
     <button class="esim-cta-btn">立即購買 eSIM</button>
   </div>
@@ -610,7 +524,7 @@
   <section class="faq-section">
     <div class="container">
       <div class="section-heading">
-        <h2>關於中國 eSIM 的常見問題</h2>
+        <h2>關於<?php echo get_field('esim_country', get_the_ID()); ?> eSIM 的常見問題</h2>
         <p>還有其他疑問？聯繫我們的客服！</p>
       </div>
 
@@ -731,7 +645,11 @@
 
   // slider
   const sliderTrack = document.getElementById('sliderTrack');
-    sliderTrack.innerHTML += sliderTrack.innerHTML;
+
+if (sliderTrack && !sliderTrack.dataset.duplicated) {
+  sliderTrack.innerHTML += sliderTrack.innerHTML;
+  sliderTrack.dataset.duplicated = 'true';
+}
 
    
 
