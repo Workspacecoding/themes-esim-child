@@ -50,86 +50,36 @@
 
 </div>
 
+
   <!-- /.esim-product-info -->
- 
+
         <!-- RIGHT: Purchase Card -->
+        <div class="esim-card-shell">
         <div class="esim-purchase-card">
- 
- <!-- Plan Type Toggle -->
- <div class="esim-section-label">選擇方案類型</div>
- <div class="esim-plan-toggle">
-   <button class="esim-plan-btn active" onclick="selectPlan(this)">吃到飽</button>
-   <button class="esim-plan-btn" onclick="selectPlan(this)">總流量</button>
- </div>
+        <div class="esim-card-header">
+  <div class="esim-card-title">
+    <span class="esim-flag">🇨🇳</span>
+    <span class="esim-title-text">中國 eSIM</span>
+  </div>
 
- <!-- Day Slider -->
- <div class="esim-slider-section">
-   <div class="esim-section-label">選擇旅行天數</div>
-   <div class="esim-slider-wrapper" id="sliderWrapper">
-     <div class="esim-slider-bubble" id="sliderBubble">1</div>
-     <input
-       type="range"
-       class="esim-range"
-       id="daySlider"
-       min="1" max="30" value="1"
-       oninput="updateSlider(this)"
-     >
-     <div class="esim-slider-labels">
-       <span>1天</span>
-       <span>30天</span>
-     </div>
-   </div>
- </div>
+  <?php echo do_shortcode('[custom_esim_slider]'); ?>
 
- <!-- Plan Summary -->
- <div class="esim-plan-summary">
-   <div class="esim-plan-name">
-     <span id="planDayDisplay">1 天</span>
-     <span class="esim-plan-badge-unlimited">∞ 吃到飽</span>
-   </div>
-   <div class="esim-plan-price-row">
-     <span class="esim-price-label">單張價格</span>
-     <span class="esim-price-value" id="unitPrice">NT$2,064</span>
-   </div>
- </div>
-
- <!-- Quantity -->
- <div class="esim-qty-section">
-   <div class="esim-section-label">購買數量</div>
-   <div class="esim-qty-row">
-     <div class="esim-qty-ctrl">
-       <button class="esim-qty-btn" onclick="changeQty(-1)">−</button>
-       <span class="esim-qty-num" id="qtyDisplay">1</span>
-       <button class="esim-qty-btn" onclick="changeQty(1)">+</button>
-     </div>
-     <div>
-       <div class="esim-subtotal-label">小計</div>
-       <div class="esim-subtotal-value" id="subtotalDisplay">NT$2,064</div>
-     </div>
-   </div>
- </div>
-
- <!-- CTA -->
- <button class="esim-buy-btn">立即購買</button>
-
- <div class="esim-secure-note">
-   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-     <polyline points="20 6 9 17 4 12"/>
-   </svg>
-   付款過程保固安全
- </div>
-
+  </div>
 </div><!-- /.esim-purchase-card -->
 
 </div><!-- /.esim-product-layout -->
 
 </div><!-- /.esim-product-wrapper -->
 </div><!-- /.esim-hero-bg -->
- 
+<div class="esim-slider-isolate">
+
+</div>
 <!-- ===== Product Tabs Section ===== -->
-<div class="esim-tabs-section">
-  <div class="esim-tabs-card">
+
  
+<section class="esim-tabs-section">
+  <div class="esim-tabs-card">
+
     <!-- Tab Nav -->
     <nav class="esim-tab-nav">
       <button class="esim-tab-btn active" onclick="switchTab(this, 'tab-desc')">商品說明</button>
@@ -795,3 +745,4 @@
     });
   
 </script>
+
