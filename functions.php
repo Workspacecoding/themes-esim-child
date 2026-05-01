@@ -20,4 +20,27 @@ add_action( 'wp_enqueue_scripts', function () {
 		['blocksy-parent-style'],
 		wp_get_theme()->get( 'Version' )
 	);
+	wp_enqueue_script(
+		'product-script',
+		get_stylesheet_directory_uri() . '/assets/js/product.js', 
+		[], 
+		'1.0', 
+		true 
+	);
+
+	
 }, 20 );
+
+add_action('wp_head', function () {
+	if (!is_product()) {
+		return;
+	}
+
+	$schema = get_field('esim_schema', get_the_ID());
+
+	if ($schema) {
+		echo '<script type="application/ld+json">';
+		echo $schema;
+		echo '</script>';
+	}
+}, 20);

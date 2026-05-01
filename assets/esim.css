@@ -870,6 +870,126 @@ font-size:14px;
     line-height: 1.7;
   }
  
+
+  /* 769px - 990px：一列 2 個 */
+@media (min-width: 769px) and (max-width: 990px) {
+  .esim-steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .esim-step-img {
+    height: 170px;
+  }
+
+  .esim-step-img svg {
+    height: 130px;
+  }
+}
+
+/* 481px - 768px：一列 1 個，卡片左右圖文排列 */
+@media (min-width: 481px) and (max-width: 768px) {
+  .esim-steps-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .esim-step-card {
+    display: grid;
+    grid-template-columns: 42% 1fr;
+    grid-template-areas:
+      "badge badge"
+      "img body";
+    align-items: center;
+  }
+
+  .esim-step-badge {
+    grid-area: badge;
+    width: fit-content;
+  }
+
+  .esim-step-img {
+    grid-area: img;
+    height: 190px;
+    padding: 10px;
+  }
+
+  .esim-step-img svg {
+    height: 150px;
+  }
+
+  .esim-step-body {
+    grid-area: body;
+    padding: 20px 24px;
+  }
+
+  .esim-step-title {
+    font-size: 18px;
+  }
+
+  .esim-step-desc {
+    font-size: 15px;
+  }
+}/* 769px - 990px：一列 2 個 */
+@media (min-width: 769px) and (max-width: 990px) {
+  .esim-steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .esim-step-img {
+    height: 170px;
+  }
+
+  .esim-step-img svg {
+    height: 130px;
+  }
+}
+
+/* 481px - 768px：一列 1 個，卡片左右圖文排列 */
+@media (min-width: 481px) and (max-width: 768px) {
+  .esim-steps-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .esim-step-card {
+    display: grid;
+    grid-template-columns: 42% 1fr;
+    grid-template-areas:
+      "badge badge"
+      "img body";
+    align-items: center;
+  }
+
+  .esim-step-badge {
+    grid-area: badge;
+    width: fit-content;
+  }
+
+  .esim-step-img {
+    grid-area: img;
+    height: 190px;
+    padding: 10px;
+  }
+
+  .esim-step-img svg {
+    height: 150px;
+  }
+
+  .esim-step-body {
+    grid-area: body;
+    padding: 20px 24px;
+  }
+
+  .esim-step-title {
+    font-size: 18px;
+  }
+
+  .esim-step-desc {
+    font-size: 15px;
+  }
+}
   /* ===== Responsive ===== */
   @media (max-width: 720px) {
     .esim-product-layout {
@@ -894,75 +1014,158 @@ font-size:14px;
       padding: 0 20px 56px;
       text-align: center;
     }
-    .esim-compare-section .esim-section-heading { margin-bottom: 8px; }
+    
+    .esim-compare-section .esim-section-heading {
+      margin-bottom: 8px;
+    }
+    
     .esim-compare-subtitle {
       font-size: 13px;
       color: var(--text-light);
       margin-bottom: 32px;
     }
+    
     .esim-compare-table-wrap {
+      width: 100%;
       overflow-x: auto;
+      position: relative;
+    
       border-radius: var(--radius-lg);
       border: 1.5px solid var(--border);
       box-shadow: 0 4px 20px rgba(42,123,245,0.07);
+    
+      background: var(--white);
     }
+    
     .esim-compare-table {
       width: 100%;
-      border-collapse: collapse;
-      min-width: 560px;
+      min-width: 720px;
+    
+      border-collapse: separate;
+      border-spacing: 0;
+    
       background: var(--white);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
     }
+    
     .esim-compare-table th,
     .esim-compare-table td {
       padding: 14px 18px;
       border-bottom: 1px solid #edf2fb;
+      border-right: 1px solid #edf2fb;
+    
       font-size: 13.5px;
       text-align: center;
+      vertical-align: middle;
+    
+      background: var(--white);
     }
+    
+    .esim-compare-table th:last-child,
+    .esim-compare-table td:last-child {
+      border-right: none;
+    }
+    
     .esim-compare-table tr:last-child td,
-    .esim-compare-table tr:last-child th { border-bottom: none; }
-    .esim-compare-table thead th { border-bottom: 1.5px solid var(--border); }
-   
-    /* Label column */
-    .esim-compare-table td:first-child,
-    .esim-compare-table th:first-child {
+    .esim-compare-table tr:last-child th {
+      border-bottom: none;
+    }
+    
+    .esim-compare-table thead th {
+      border-bottom: 1.5px solid var(--border);
+    }
+    
+    /* 第一欄固定 */
+    .esim-compare-table th:first-child,
+    .esim-compare-table td:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 10;
+    
+      min-width: auto;
+      width: auto;
+    
       text-align: left;
       color: var(--text-dark);
       font-weight: 500;
-      width: 200px;
       background: #fafcff;
     }
-    .esim-compare-table thead th:first-child { background: #fafcff; }
-   
+    
+    /* 表頭第一欄層級更高 */
+    .esim-compare-table thead th:first-child {
+      z-index: 20;
+      background: #fafcff;
+    }
+    
+    /* 固定欄右側陰影 */
+    .esim-compare-table th:first-child::after,
+    .esim-compare-table td:first-child::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: -8px;
+      width: 8px;
+      height: 100%;
+      background: linear-gradient(to right, rgba(42,123,245,0.08), transparent);
+      pointer-events: none;
+    }
+    
     /* OceanEsim column highlight */
     .esim-compare-table th.col-us,
     .esim-compare-table td.col-us {
       background: #f0f6ff;
     }
-   
+    
+    /* 避免 OceanEsim 蓋過固定欄 */
+    .esim-compare-table th.col-us,
+    .esim-compare-table td.col-us {
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* 品牌欄 */
+    .esim-th-brand {
+      min-width: 120px;
+    }
+    
+    /* 手機版 */
+    @media (max-width: 768px) {
+      .esim-compare-section {
+        padding: 0 16px 48px;
+      }
+    
+      .esim-compare-table {
+        min-width: 680px;
+      }
+    
+      .esim-compare-table th,
+      .esim-compare-table td {
+        padding: 12px 14px;
+        font-size: 13px;
+      }
+    
+      .esim-compare-table th:first-child,
+      .esim-compare-table td:first-child {
+        min-width: auto;
+        width:auto;
+      }
+    }
+
+    
     /* Brand header cell */
     .esim-th-brand { padding-top: 20px !important; padding-bottom: 16px !important; }
-    .esim-brand-icon {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      margin: 0 auto 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      font-weight: 900;
+
+    .esim-compare-table tr:last-child th img{
+      width: 42px;
+    height: 42px;
+    object-fit: contain;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    height: auto;
+    max-width: 100%;
+
     }
-    .esim-brand-icon--ocean { background: #2A7BF5; color: #fff; font-size: 16px; }
-    .esim-brand-icon--saily  { background: #F5C842; color: #fff; font-size: 20px; }
-    .esim-brand-icon--hola   { background: #E8334A; color: #fff; font-size: 18px; }
-    .esim-brand-icon--airalo { background: #fff; border: 1.5px solid #eee; }
-    .esim-brand-name {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-mid);
-    }
+   
     .col-us .esim-brand-name { color: var(--primary); }
    
     /* Check / Cross */
@@ -970,6 +1173,8 @@ font-size:14px;
     .esim-cross { color: #EF4444; font-size: 17px; }
    
     /* Value badges */
+
+    
     .esim-val-badge {
       display: inline-block;
       padding: 3px 12px;
@@ -989,15 +1194,22 @@ font-size:14px;
     }
     .esim-cta-banner {
       border-radius: var(--radius-lg);
-      background: linear-gradient(135deg, #1a5fd4 0%, #2A7BF5 50%, #5b9dff 100%);
+    
+     
+    
+      background-size: cover;       /* ⭐ 滿版 */
+      background-position: center;  /* ⭐ 置中 */
+      background-repeat: no-repeat;
+    
       padding: 44px 48px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 24px;
+    
       box-shadow: 0 12px 40px rgba(42,123,245,0.3);
     }
-    .esim-cta-text {}
+ 
     .esim-cta-title {
       font-size: 22px;
       font-weight: 800;
@@ -1071,6 +1283,11 @@ font-size:14px;
 
     .slider-wrap {
       position: relative;
+      overflow: hidden;
+      max-width: 980px;
+    margin: 0 auto;
+    padding: 0 20px 56px;
+      
     }
 
     .slider-wrap::before,
@@ -1082,17 +1299,17 @@ font-size:14px;
       height: 100%;
       z-index: 2;
       pointer-events: none;
-      display: none !important;
+
     }
 
     .slider-wrap::before {
       left: 0;
-      background: linear-gradient(to right, #f3f3f3 0%, rgba(243, 243, 243, 0) 100%);
+
     }
 
     .slider-wrap::after {
       right: 0;
-      background: linear-gradient(to left, #f3f3f3 0%, rgba(243, 243, 243, 0) 100%);
+ 
     }
 
     .slider-track {
@@ -1114,7 +1331,8 @@ font-size:14px;
       padding: 22px 20px;
       box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
       border: 1px solid rgba(15, 23, 42, 0.04);
-      flex-shrink: 0;
+
+        flex: 0 0 280px;
     }
 
     .review-header {
@@ -1125,8 +1343,8 @@ font-size:14px;
     }
 
     .avatar {
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       background: #e5e7eb;
       display: flex;
@@ -1136,8 +1354,8 @@ font-size:14px;
     }
 
     .avatar svg {
-      width: 22px;
-      height: 22px;
+      width: 70%;
+      height: 70%;
       fill: #9ca3af;
     }
 
@@ -1158,9 +1376,10 @@ font-size:14px;
     }
 
     .review-text {
-      font-size: 13px;
-      line-height: 1.8;
-      color: #4b5563;
+      color: #393e41;
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0;
     }
 
     @keyframes marquee {
@@ -1168,7 +1387,7 @@ font-size:14px;
         transform: translateX(0);
       }
       100% {
-        transform: translateX(calc(-300px * 4));
+        transform: translateX(-50%);
       }
     }
 

@@ -30,7 +30,7 @@ $img = get_field('country_img', get_the_ID());
   <?php endif; ?>
 </div>
         <h1 class="esim-product-title">  <?php the_title(); ?></h1>
-        <span class="esim-badge esim-badge--safe esim-badge--label">品質認證服務</span>
+        <span class="esim-badge esim-badge--safe esim-badge--label"><?php echo get_field('country_features', get_the_ID()); ?> </span>
       </div>
  
       <p class="esim-product-desc">
@@ -77,7 +77,7 @@ $img = get_field('country_img', get_the_ID());
     <span class="esim-title-text"><?php the_title(); ?></p></span>
   </div>
 
-  <?php echo do_shortcode('[custom_esim_slider]'); ?>
+  <?php echo do_shortcode('[custom_esim_slider_new]'); ?>
 
   </div>
 </div><!-- /.esim-purchase-card -->
@@ -270,28 +270,7 @@ $upload_url = wp_upload_dir()['baseurl'];
     <div class="esim-step-card">
       <span class="esim-step-badge">步驟 1</span>
       <div class="esim-step-img">
-        <svg viewBox="0 0 160 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Phone shell -->
-          <rect x="30" y="10" width="100" height="180" rx="16" fill="#1a1a2e"/>
-          <rect x="36" y="20" width="88" height="160" rx="10" fill="#f0f6ff"/>
-          <!-- Notch -->
-          <rect x="58" y="14" width="44" height="10" rx="5" fill="#2A7BF5"/>
-          <!-- Calendar card -->
-          <rect x="50" y="50" width="60" height="60" rx="8" fill="#ffffff" stroke="#d8e4f5" stroke-width="1.5"/>
-          <rect x="50" y="50" width="60" height="16" rx="8" fill="#2A7BF5"/>
-          <rect x="50" y="58" width="60" height="8" fill="#2A7BF5"/>
-          <line x1="66" y1="46" x2="66" y2="56" stroke="#2A7BF5" stroke-width="3" stroke-linecap="round"/>
-          <line x1="94" y1="46" x2="94" y2="56" stroke="#2A7BF5" stroke-width="3" stroke-linecap="round"/>
-          <!-- Grid -->
-          <text x="80" y="84" font-size="9" fill="#666" text-anchor="middle" font-family="Arial">M T W T F</text>
-          <text x="80" y="95" font-size="9" fill="#333" text-anchor="middle" font-family="Arial">1  2  3  4  5</text>
-          <text x="80" y="106" font-size="9" fill="#333" text-anchor="middle" font-family="Arial">6  7  8  9 10</text>
-          <!-- 7 DAYS badge -->
-          <rect x="56" y="125" width="48" height="20" rx="6" fill="#2A7BF5"/>
-          <text x="80" y="139" font-size="10" font-weight="700" fill="white" text-anchor="middle" font-family="Arial">7 DAYS</text>
-          <!-- Home bar -->
-          <rect x="68" y="172" width="24" height="4" rx="2" fill="#d0d8e8"/>
-        </svg>
+      <img src="<?php echo wp_upload_dir()['baseurl']; ?>/2026/05/1.png" alt="trip-days">
       </div>
       <div class="esim-step-body">
         <div class="esim-step-title">選擇旅行天數</div>
@@ -303,30 +282,7 @@ $upload_url = wp_upload_dir()['baseurl'];
     <div class="esim-step-card">
       <span class="esim-step-badge">步驟 2</span>
       <div class="esim-step-img">
-        <svg viewBox="0 0 160 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="30" y="10" width="100" height="180" rx="16" fill="#1a1a2e"/>
-          <rect x="36" y="20" width="88" height="160" rx="10" fill="#f0f6ff"/>
-          <rect x="58" y="14" width="44" height="10" rx="5" fill="#2A7BF5"/>
-          <!-- QR Code frame -->
-          <rect x="48" y="48" width="64" height="64" rx="6" fill="white" stroke="#d8e4f5" stroke-width="1.5"/>
-          <!-- QR corner marks -->
-          <rect x="54" y="54" width="18" height="18" rx="2" fill="none" stroke="#1a1a2e" stroke-width="2.5"/>
-          <rect x="57" y="57" width="12" height="12" rx="1" fill="#1a1a2e"/>
-          <rect x="88" y="54" width="18" height="18" rx="2" fill="none" stroke="#1a1a2e" stroke-width="2.5"/>
-          <rect x="91" y="57" width="12" height="12" rx="1" fill="#1a1a2e"/>
-          <rect x="54" y="88" width="18" height="18" rx="2" fill="none" stroke="#1a1a2e" stroke-width="2.5"/>
-          <rect x="57" y="91" width="12" height="12" rx="1" fill="#1a1a2e"/>
-          <!-- QR dots middle -->
-          <rect x="88" y="88" width="4" height="4" fill="#1a1a2e"/>
-          <rect x="94" y="88" width="4" height="4" fill="#1a1a2e"/>
-          <rect x="100" y="88" width="4" height="4" fill="#1a1a2e"/>
-          <rect x="88" y="94" width="4" height="4" fill="#1a1a2e"/>
-          <rect x="100" y="100" width="4" height="4" fill="#1a1a2e"/>
-          <!-- Scan line -->
-          <line x1="48" y1="80" x2="112" y2="80" stroke="#2A7BF5" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.7"/>
-          <!-- Label -->
-          <text x="80" y="130" font-size="9" fill="#888" text-anchor="middle" font-family="Arial">掃描 QR Code</text>
-          <rect x="68" y="172" width="24" height="4" rx="2" fill="#d0d8e8"/>
+      <img src="<?php echo wp_upload_dir()['baseurl']; ?>/2026/05/2.png" alt="esim-qrcode">
         </svg>
       </div>
       <div class="esim-step-body">
@@ -339,20 +295,7 @@ $upload_url = wp_upload_dir()['baseurl'];
     <div class="esim-step-card">
       <span class="esim-step-badge">步驟 3</span>
       <div class="esim-step-img">
-        <svg viewBox="0 0 160 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="30" y="10" width="100" height="180" rx="16" fill="#1a1a2e"/>
-          <rect x="36" y="20" width="88" height="160" rx="10" fill="#f0f6ff"/>
-          <rect x="58" y="14" width="44" height="10" rx="5" fill="#2A7BF5"/>
-          <!-- WiFi arcs -->
-          <path d="M80 100 m-36 0 a36 36 0 0 1 72 0" stroke="#2A7BF5" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.25"/>
-          <path d="M80 100 m-24 0 a24 24 0 0 1 48 0" stroke="#2A7BF5" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.5"/>
-          <path d="M80 100 m-13 0 a13 13 0 0 1 26 0" stroke="#2A7BF5" stroke-width="4" stroke-linecap="round" fill="none"/>
-          <circle cx="80" cy="100" r="5" fill="#2A7BF5"/>
-          <!-- Connected badge -->
-          <rect x="50" y="118" width="60" height="20" rx="6" fill="#2A7BF5"/>
-          <text x="80" y="132" font-size="9" font-weight="700" fill="white" text-anchor="middle" font-family="Arial">CONNECTED</text>
-          <rect x="68" y="172" width="24" height="4" rx="2" fill="#d0d8e8"/>
-        </svg>
+      <img src="<?php echo wp_upload_dir()['baseurl']; ?>/2026/05/2-copy-0.png" alt="online">
       </div>
       <div class="esim-step-body">
         <div class="esim-step-title">享受旅程</div>
@@ -374,23 +317,24 @@ $upload_url = wp_upload_dir()['baseurl'];
           <th></th>
           <!-- OceanEsim -->
           <th class="esim-th-brand col-us">
-            <div class="esim-brand-icon esim-brand-icon--ocean">O</div>
+          <img src="<?php echo wp_upload_dir()['baseurl']; ?>/2026/05/OceanEsim-Logo-1.png" alt="online">
             <div class="esim-brand-name">OceanEsim</div>
           </th>
           <!-- Saily -->
           <th class="esim-th-brand">
-            <div class="esim-brand-icon esim-brand-icon--saily">S</div>
+          <img src="<?php echo wp_upload_dir()['baseurl']; ?>/2026/05/saily-Logo.png" alt="online">
             <div class="esim-brand-name">Saily</div>
           </th>
           <!-- HolaFly -->
           <th class="esim-th-brand">
-            <div class="esim-brand-icon esim-brand-icon--hola">H</div>
+          <img src="<?php echo wp_upload_dir()['baseurl']; ?>/2026/05/HoalFly-Logo.png" alt="online">
             <div class="esim-brand-name">HolaFly</div>
           </th>
           <!-- Airalo -->
           <th class="esim-th-brand">
             <div class="esim-brand-icon esim-brand-icon--airalo">
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 4 L22 22 H6 Z" fill="#FF6B35"/><path d="M14 10 L19 22 H9 Z" fill="#FF9A6C"/></svg>
+            <img src="<?php echo wp_upload_dir()['baseurl']; ?>/2026/05/Airalo-Logo.png" alt="online">
+
             </div>
             <div class="esim-brand-name">Airalo</div>
           </th>
@@ -439,7 +383,7 @@ $upload_url = wp_upload_dir()['baseurl'];
  
 <!-- ===== CTA Banner ===== -->
 <div class="esim-cta-section">
-  <div class="esim-cta-banner">
+  <div class="esim-cta-banner" style="background-image: url('<?php echo wp_upload_dir()['baseurl']; ?>/2026/05/b4.png');">
     <div class="esim-cta-text">
       <div class="esim-cta-title">最好的<?php echo get_field('esim_country', get_the_ID()); ?> eSIM 是哪一個？</div>
       <p class="esim-cta-desc">最好的<?php echo get_field('esim_country', get_the_ID()); ?> eSIM 是 OceanEsim，這張 eSIM 可以獲得<strong>無限吃到飽流量</strong>，而且提供極快的網路速度與穩定訊號，即買即用，一鍵快速安裝啟用，無論你是到旅遊景點還是偏遠地區，我們的 eSIM 都能隨時讓你保持連線。</p>
@@ -448,20 +392,23 @@ $upload_url = wp_upload_dir()['baseurl'];
   </div>
 </div>
 
+
+
 <div class="container">
       <div class="section-heading">
         <h2>旅客對我們 eSIM 的評價</h2>
         <p>看看其他旅客對我們 eSIM 的評價。</p>
       </div>
 
+</svg>
       <div class="slider-wrap">
-        <div class="slider-track" id="sliderTrack">
+        <div class="slider-track" id="reviewSliderTrack">
           <div class="review-card">
             <div class="review-header">
               <div class="avatar">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.418 0-8 2.239-8 5 0 .552.448 1 1 1h14c.552 0 1-.448 1-1 0-2.761-3.582-5-8-5Z"/>
-                </svg>
+              <svg class="avatar-svg" viewBox="0 0 24 24">
+    <use href="#avatar-icon" xlink:href="#avatar-icon"></use>
+  </svg>
               </div>
               <div>
                 <div class="reviewer-name">Lynn <span>🇺🇸</span></div>
@@ -474,9 +421,9 @@ $upload_url = wp_upload_dir()['baseurl'];
           <div class="review-card">
             <div class="review-header">
               <div class="avatar">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.418 0-8 2.239-8 5 0 .552.448 1 1 1h14c.552 0 1-.448 1-1 0-2.761-3.582-5-8-5Z"/>
-                </svg>
+              <svg class="avatar-svg" viewBox="0 0 24 24">
+    <use href="#avatar-icon" xlink:href="#avatar-icon"></use>
+  </svg>
               </div>
               <div>
                 <div class="reviewer-name">曉雯 <span>🇹🇼</span></div>
@@ -489,9 +436,9 @@ $upload_url = wp_upload_dir()['baseurl'];
           <div class="review-card">
             <div class="review-header">
               <div class="avatar">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.418 0-8 2.239-8 5 0 .552.448 1 1 1h14c.552 0 1-.448 1-1 0-2.761-3.582-5-8-5Z"/>
-                </svg>
+              <svg class="avatar-svg" viewBox="0 0 24 24">
+    <use href="#avatar-icon" xlink:href="#avatar-icon"></use>
+  </svg>
               </div>
               <div>
                 <div class="reviewer-name">怡君 <span>🇹🇼</span></div>
@@ -504,9 +451,9 @@ $upload_url = wp_upload_dir()['baseurl'];
           <div class="review-card">
             <div class="review-header">
               <div class="avatar">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.418 0-8 2.239-8 5 0 .552.448 1 1 1h14c.552 0 1-.448 1-1 0-2.761-3.582-5-8-5Z"/>
-                </svg>
+              <svg class="avatar-svg" viewBox="0 0 24 24">
+    <use href="#avatar-icon" xlink:href="#avatar-icon"></use>
+  </svg>
               </div>
               <div>
                 <div class="reviewer-name">Jason <span>🇹🇼</span></div>
@@ -568,99 +515,45 @@ $upload_url = wp_upload_dir()['baseurl'];
           <button class="faq-question">我沒有收到 QR Code 怎麼辦？<span>+</span></button>
           <div class="faq-answer">請先檢查垃圾郵件，若仍未收到請聯繫客服協助處理。</div>
         </div>
+        <?php
+$extra_faqs = [];
+
+for ($i = 1; $i <= 3; $i++) {
+  $question = get_field("esim_question{$i}", get_the_ID());
+  $answer   = get_field("esim_answer{$i}", get_the_ID());
+
+  if (!empty($question) && !empty($answer)) {
+    $extra_faqs[] = [
+      'question' => $question,
+      'answer'   => $answer,
+    ];
+  }
+}
+?>
+
+<?php foreach ($extra_faqs as $faq): ?>
+  <div class="faq-item">
+    <button class="faq-question" type="button">
+      <?php echo esc_html($faq['question']); ?>
+      <span>+</span>
+    </button>
+
+    <div class="faq-answer">
+      <?php echo wp_kses_post($faq['answer']); ?>
+    </div>
+  </div>
+<?php endforeach; ?>
       </div>
     </div>
-<script>
-  // ===== Base price per day =====
-  const BASE_PRICE_PER_DAY = 2064;
-  let currentQty = 1;
-  let currentDays = 1;
- 
-  function calcPrice(days) {
-    // Simple linear pricing: NT$2064 for 1 day, scale slightly
-    return Math.round(BASE_PRICE_PER_DAY + (days - 1) * 180);
-  }
- 
-  function formatNT(n) {
-    return 'NT$' + n.toLocaleString('zh-TW');
-  }
- 
-  function updateSlider(input) {
-    const days = parseInt(input.value);
-    currentDays = days;
-    const min = parseInt(input.min);
-    const max = parseInt(input.max);
-    const pct = (days - min) / (max - min);
- 
-    // Move bubble
-    const wrapper = document.getElementById('sliderWrapper');
-    const sliderW = input.offsetWidth;
-    const thumbW = 20;
-    const pos = pct * (sliderW - thumbW) + thumbW / 2;
-    const bubble = document.getElementById('sliderBubble');
-    bubble.style.left = pos + 'px';
-    bubble.textContent = days;
- 
-    // Gradient fill
-    input.style.background = `linear-gradient(to right, var(--primary) 0%, var(--primary) ${pct*100}%, var(--border) ${pct*100}%)`;
- 
-    // Update plan summary
-    document.getElementById('planDayDisplay').textContent = days + ' 天';
-    const price = calcPrice(days);
-    document.getElementById('unitPrice').textContent = formatNT(price);
-    updateSubtotal(price);
-  }
- 
-  function updateSubtotal(unitPrice) {
-    document.getElementById('subtotalDisplay').textContent = formatNT(unitPrice * currentQty);
-  }
- 
-  function changeQty(delta) {
-    currentQty = Math.max(1, currentQty + delta);
-    document.getElementById('qtyDisplay').textContent = currentQty;
-    const price = calcPrice(currentDays);
-    updateSubtotal(price);
-  }
- 
-  function selectPlan(btn) {
-    document.querySelectorAll('.esim-plan-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    // Update badge label
-    document.querySelector('.esim-plan-badge-unlimited').textContent =
-      btn.textContent === '吃到飽' ? '∞ 吃到飽' : '📶 總流量';
-  }
- 
-  // Init slider position on load
-  window.addEventListener('load', () => {
-    updateSlider(document.getElementById('daySlider'));
-  });
- 
-  // Tab switching
-  function switchTab(btn, panelId) {
-    document.querySelectorAll('.esim-tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.esim-tab-panel').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById(panelId).classList.add('active');
-  }
 
-  // slider
-  const sliderTrack = document.getElementById('sliderTrack');
+    <svg style="display:none;">
+    <symbol id="avatar-icon" viewBox="0 0 24 24">
+    <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.418 0-8 2.239-8 5 0 .552.448 1 1 1h14c.552 0 1-.448 1-1 0-2.761-3.582-5-8-5Z"/>
+  </symbol>
+    </svg>
 
-if (sliderTrack && !sliderTrack.dataset.duplicated) {
-  sliderTrack.innerHTML += sliderTrack.innerHTML;
-  sliderTrack.dataset.duplicated = 'true';
-}
+    <script src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/product.js" defer></script>
 
-   
 
-    // FAQ toggle
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-      const btn = item.querySelector('.faq-question');
-      btn.addEventListener('click', () => {
-        item.classList.toggle('active');
-      });
-    });
+
   
-</script>
-
